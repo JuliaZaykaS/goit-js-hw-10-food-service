@@ -17,7 +17,7 @@ checkboxEl.addEventListener('change', OnCheckboxChange);
 
 
 savedUserTheme();
-addLightTheme();
+// addLightTheme();
 // if (!localStorage.getItem('theme') === Theme.LIGHT) {
 
 //     localStorage.setItem('theme', Theme.LIGHT);
@@ -36,7 +36,7 @@ function OnCheckboxChange() {
     addDarkTheme();
 
     if (document.body.classList.contains(Theme.DARK)) {
-        // document.body.classList.remove(Theme.LIGHT);
+        document.body.classList.remove(Theme.LIGHT);
 
         localStorage.setItem('theme', Theme.DARK);
         localStorage.setItem('checked', checkboxEl.checked);
@@ -51,12 +51,21 @@ function savedUserTheme() {
     const checkedValue = localStorage.getItem('checked');
     const themeValue = localStorage.getItem('theme');
 
+    if (!themeValue || themeValue === Theme.LIGHT) {
+        localStorage.setItem('theme', Theme.LIGHT );
+        addLightTheme();
+
+    }
+
+
     if (checkedValue) {
         localStorage.setItem('theme', Theme.DARK);
         checkboxEl.checked = true;
         addDarkTheme();
+        // document.body.classList.remove(Theme.LIGHT);
+
     };
-    addLightTheme();
+    // addLightTheme();
     // } else { addLightTheme() };
     // if (themeValue === Theme.LIGHT) {
     //     addLightTheme();
@@ -66,7 +75,7 @@ function savedUserTheme() {
 // Функции добавления тем
 function addDarkTheme() {
     document.body.classList.toggle(Theme.DARK);
-    document.body.classList.remove(Theme.LIGHT);
+    // document.body.classList.remove(Theme.LIGHT);
 
     // localStorage.setItem('theme', Theme.DARK);
     // localStorage.setItem('checked', checkboxEl.checked);
